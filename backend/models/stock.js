@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema(
+const stockSchema = new Schema(
   {
     content: { type: String, required: true },
     author: {
@@ -15,4 +15,4 @@ const postSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model("Stock", stockSchema);
