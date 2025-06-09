@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import * as postService from "../../services/postService";
+import * as stockService from "../../services/stockService";
 
-export default function NewPostPage() {
+export default function NewStockPage() {
   const [content, setContent] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -12,25 +12,25 @@ export default function NewPostPage() {
     evt.preventDefault();
     try {
       // sendRequest is expecting an object as the payload
-      await postService.create({ content });
-      navigate("/posts");
+      await stockService.create({ content });
+      navigate("/stocks");
     } catch (err) {
-      setErrorMsg("Adding Post Failed");
+      setErrorMsg("Adding Stock Failed");
     }
   }
 
   return (
     <>
-      <h2>Add Post</h2>
+      <h2>Add Stock</h2>
       <form onSubmit={handleSubmit}>
-        <label>Post Content</label>
+        <label>Stock Content</label>
         <input
           type="text"
           value={content}
           onChange={(evt) => setContent(evt.target.value)}
           required
         />
-        <button type="submit">ADD POST</button>
+        <button type="submit">ADD STOCK</button>
       </form>
       <p className="error-message">&nbsp;{errorMsg}</p>
     </>

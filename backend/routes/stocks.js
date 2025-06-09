@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const stocksCtrl = require("../controllers/posts");
+const stocksCtrl = require("../controllers/stocks");
 const ensureLoggedIn = require("../middleware/ensureLoggedIn");
 
 // All paths start with '/api/stocks'
