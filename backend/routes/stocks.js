@@ -12,5 +12,7 @@ router.use(ensureLoggedIn);
 router.get("/", stocksCtrl.index);
 // POST / api/stocks (CREATE action)
 router.post("/", stocksCtrl.create);
+// SHOW / api/stocks/:stockId (SHOW action)
+router.get("/:stockId", stocksCtrl.show);
 
 module.exports = router;

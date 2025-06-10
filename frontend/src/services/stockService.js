@@ -9,3 +9,7 @@ export async function index() {
 export async function create(stockData) {
   return sendRequest(BASE_URL, "POST", stockData);
 }
+
+export async function show(stockId) {
+  return sendRequest(`${BASE_URL}/${stockId}`);
+}
