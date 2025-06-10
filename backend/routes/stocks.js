@@ -14,5 +14,7 @@ router.get("/", stocksCtrl.index);
 router.post("/", stocksCtrl.create);
 // SHOW / api/stocks/:stockId (SHOW action)
 router.get("/:stockId", stocksCtrl.show);
+// DELETE / api/stocks/:stockId (DELETE action)
+router.delete("/:stockId", stocksCtrl.deleteStock);
 
 module.exports = router;

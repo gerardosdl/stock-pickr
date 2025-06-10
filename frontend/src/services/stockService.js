@@ -13,3 +13,7 @@ export async function create(stockData) {
 export async function show(stockId) {
   return sendRequest(`${BASE_URL}/${stockId}`);
 }
+
+export async function deleteStock(stockId) {
+  return sendRequest(`${BASE_URL}/${stockId}`, "DELETE");
+}

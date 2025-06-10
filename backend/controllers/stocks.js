@@ -4,6 +4,7 @@ module.exports = {
   index,
   create,
   show,
+  deleteStock,
 };
 
 async function index(req, res) {
@@ -53,12 +54,13 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
-    const stock = await Stock.findOne({
-      _id: req.params.stockId,
-      user: req.user._id,
-    });
+    const stock = await Stock.findById(req.params.stockId);
+
     if (!stock) {
       return res.status(404).json({ message: "Stock not found" });
+    }
+    if (!stock.user.equals(req.user._id)) {
+      return res.status(403).send("Access denied");
     }
     const priceRes = await fetch(
       `https://api.polygon.io/v2/aggs/ticker/${stock.symbol}/prev?adjusted=true&apiKey=${process.env.POLYGON_API_KEY}`
@@ -72,5 +74,21 @@ async function show(req, res) {
     });
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch stock" });
+  }
+}
+
+async function deleteStock(req, res) {
+  try {
+    const stock = await Stock.findById(req.params.stockId);
+    if (!stock) {
+      return res.status(404).json({ message: "Stock not found" });
+    }
+    if (!stock.user.equals(req.user._id)) {
+      return res.status(403).send("You're not allowed to do that!");
+    }
+    const deletedStock = await Stock.findByIdAndDelete(req.params.stockId);
+    res.status(200).json(deletedStock);
+  } catch (err) {
+    res.status(500).json({ message: "failed to delete stock" });
   }
 }
