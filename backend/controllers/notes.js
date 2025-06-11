@@ -2,6 +2,7 @@ const Stock = require("../models/stock");
 
 module.exports = {
   create,
+  update,
 };
 
 async function create(req, res) {
@@ -16,5 +17,20 @@ async function create(req, res) {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err.message });
+  }
+}
+
+async function update(req, res) {
+  try {
+    const stock = await Stock.findOne({ "notes._id": req.params.noteId });
+    const note = stock.notes.id(req.params.noteId);
+    if (!stock.user.equals(req.user._id)) {
+      return res.status(403), json({ message: "Unauthorized" });
+    }
+    note.content = req.body.content;
+    await stock.save();
+    res.status(200).json({ message: "Note updated successfully" });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
   }
 }

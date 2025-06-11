@@ -11,7 +11,7 @@ router.use(ensureLoggedIn);
 // POST / api/stocks/:stockId/notes (CREATE action)
 router.post("/stocks/:stockId/notes", notesCtrl.create);
 // PUT / api/notes/:noteId(EDIT action)
-// router.put("/notes/:noteId", notesCtrl.update);
+router.put("/notes/:noteId", notesCtrl.update);
 // DELETE / api/notes/:noteId (DELETE action)
 // router.delete("/notes/:noteId", notesCtrl.deleteNote);
 
