@@ -2,8 +2,6 @@ const Stock = require("../models/stock");
 
 module.exports = {
   create,
-  update,
-  deleteNote,
 };
 
 async function create(req, res) {
