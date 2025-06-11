@@ -3,6 +3,7 @@ const Stock = require("../models/stock");
 module.exports = {
   create,
   update,
+  deleteNote,
 };
 
 async function create(req, res) {
@@ -25,11 +26,26 @@ async function update(req, res) {
     const stock = await Stock.findOne({ "notes._id": req.params.noteId });
     const note = stock.notes.id(req.params.noteId);
     if (!stock.user.equals(req.user._id)) {
-      return res.status(403), json({ message: "Unauthorized" });
+      return res.status(403).json({ message: "Unauthorized" });
     }
     note.content = req.body.content;
     await stock.save();
     res.status(200).json({ message: "Note updated successfully" });
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+}
+
+async function deleteNote(req, res) {
+  try {
+    const stock = await Stock.findOne({ "notes._id": req.params.noteId });
+    const note = stock.notes.id(req.params.noteId);
+    if (!stock.user.equals(req.user._id)) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+    stock.notes.remove({ _id: req.params.noteId });
+    await stock.save();
+    res.status(200).json({ message: "Note deleted successfully" });
   } catch (err) {
     res.status(500).json({ err: err.message });
   }

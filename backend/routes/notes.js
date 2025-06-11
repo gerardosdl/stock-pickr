@@ -13,6 +13,6 @@ router.post("/stocks/:stockId/notes", notesCtrl.create);
 // PUT / api/notes/:noteId(EDIT action)
 router.put("/notes/:noteId", notesCtrl.update);
 // DELETE / api/notes/:noteId (DELETE action)
-// router.delete("/notes/:noteId", notesCtrl.deleteNote);
+router.delete("/notes/:noteId", notesCtrl.deleteNote);
 
 module.exports = router;
