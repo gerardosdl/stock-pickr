@@ -4,6 +4,7 @@ import { getUser } from "../../services/authService";
 import HomePage from "../HomePage/HomePage";
 import StockListPage from "../StockListPage/StockListPage";
 import NewStockPage from "../NewStockPage/NewStockPage";
+import StockDetailsPage from "../StockDetailsPage/StockDetailsPage";
 import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
 import NavBar from "../../components/NavBar/NavBar";
@@ -20,6 +21,10 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/stocks" element={<StockListPage user={user} />} />
+            <Route
+              path="/stocks/:stockId"
+              element={<StockDetailsPage user={user} />}
+            />
             <Route path="/stocks/new" element={<NewStockPage />} />
             <Route path="*" element={null} />
           </Routes>
