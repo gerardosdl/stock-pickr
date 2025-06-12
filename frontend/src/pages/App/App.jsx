@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router";
+import { Routes, Route, useNavigate } from "react-router";
 import { getUser } from "../../services/authService";
+import * as stockService from "../../services/stockService";
 import HomePage from "../HomePage/HomePage";
 import StockListPage from "../StockListPage/StockListPage";
 import NewStockPage from "../NewStockPage/NewStockPage";
@@ -12,6 +13,13 @@ import "./App.css";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [stocks, setStocks] = useState([]);
+  const navigate = useNavigate();
+  const handleDeleteStock = async (stockId) => {
+    const deletedStock = await stockService.deleteStock(stockId);
+    setStocks(stocks.filter((stock) => stock._id !== deletedStock._id));
+    navigate("/stocks");
+  };
 
   return (
     <main className="App">
@@ -23,7 +31,12 @@ export default function App() {
             <Route path="/stocks" element={<StockListPage user={user} />} />
             <Route
               path="/stocks/:stockId"
-              element={<StockDetailsPage user={user} />}
+              element={
+                <StockDetailsPage
+                  user={user}
+                  handleDeleteStock={handleDeleteStock}
+                />
+              }
             />
             <Route path="/stocks/new" element={<NewStockPage />} />
             <Route path="*" element={null} />
