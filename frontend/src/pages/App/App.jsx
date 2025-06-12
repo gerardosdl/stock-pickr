@@ -19,7 +19,7 @@ export default function App() {
         {user ? (
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/stocks" element={<StockListPage />} />
+            <Route path="/stocks" element={<StockListPage user={user} />} />
             <Route path="/stocks/new" element={<NewStockPage />} />
             <Route path="*" element={null} />
           </Routes>

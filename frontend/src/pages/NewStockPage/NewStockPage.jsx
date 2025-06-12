@@ -17,7 +17,7 @@ export default function NewStockPage() {
     evt.preventDefault();
     try {
       // sendRequest is expecting an object as the payload
-      await stockService.create({ formData });
+      await stockService.create(formData);
       navigate("/stocks");
     } catch (err) {
       setErrorMsg("Adding Stock Failed");
@@ -32,7 +32,7 @@ export default function NewStockPage() {
           <label htmlFor="symbol-input">Ticker Symbol</label>
           <input
             type="text"
-            name="text"
+            name="symbol"
             id="text-input"
             value={formData.symbol}
             onChange={handleChange}

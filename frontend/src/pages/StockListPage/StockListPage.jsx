@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 import * as stockService from "../../services/stockService";
 
-export default function StockListPage() {
+export default function StockListPage({ user }) {
   const [stocks, setStocks] = useState([]);
 
   useEffect(() => {
@@ -9,18 +10,29 @@ export default function StockListPage() {
       const stocks = await stockService.index();
       setStocks(stocks);
     }
-    fetchStocks();
-  }, []);
+    if (user) {
+      fetchStocks();
+    }
+  }, [user]);
 
   return (
     <>
       <h1>Stock List</h1>
       {stocks.length ? (
-        <ul>
+        <main>
           {stocks.map((stock) => (
-            <li key={stock._id}>{stock.content}</li>
+            <Link key={stock._id} to={`/stocks/${stock._id}`}>
+              <article>
+                <header>
+                  <h2>{stock.name}</h2>
+                  <p>
+                    Added on {new Date(stock.createdAt).toLocaleDateString()}
+                  </p>
+                </header>
+              </article>
+            </Link>
           ))}
-        </ul>
+        </main>
       ) : (
         <p>No Stocks Yet!</p>
       )}
