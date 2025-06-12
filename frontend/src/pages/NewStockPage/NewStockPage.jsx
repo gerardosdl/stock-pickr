@@ -3,16 +3,21 @@ import { useNavigate } from "react-router";
 import * as stockService from "../../services/stockService";
 
 export default function NewStockPage() {
-  const [content, setContent] = useState("");
+  const [formData, setFormData] = useState({
+    symbol: "",
+  });
   const [errorMsg, setErrorMsg] = useState("");
-
   const navigate = useNavigate();
+
+  const handleChange = (evt) => {
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  };
 
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
       // sendRequest is expecting an object as the payload
-      await stockService.create({ content });
+      await stockService.create({ formData });
       navigate("/stocks");
     } catch (err) {
       setErrorMsg("Adding Stock Failed");
@@ -21,18 +26,23 @@ export default function NewStockPage() {
 
   return (
     <>
-      <h2>Add Stock</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Stock Content</label>
-        <input
-          type="text"
-          value={content}
-          onChange={(evt) => setContent(evt.target.value)}
-          required
-        />
-        <button type="submit">ADD STOCK</button>
-      </form>
-      <p className="error-message">&nbsp;{errorMsg}</p>
+      <main>
+        <h2>Add Stock</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="symbol-input">Ticker Symbol</label>
+          <input
+            type="text"
+            name="text"
+            id="text-input"
+            value={formData.symbol}
+            onChange={handleChange}
+            placeholder="e.g. APPL"
+            required
+          />
+          <button type="submit">ADD STOCK</button>
+        </form>
+        <p className="error-message">&nbsp;{errorMsg}</p>
+      </main>
     </>
   );
 }
