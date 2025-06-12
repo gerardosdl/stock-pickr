@@ -33,10 +33,10 @@ export default function NewStockPage() {
           <input
             type="text"
             name="symbol"
-            id="text-input"
+            id="symbol-input"
             value={formData.symbol}
             onChange={handleChange}
-            placeholder="e.g. APPL"
+            placeholder="e.g. AAPL"
             required
           />
           <button type="submit">ADD STOCK</button>
