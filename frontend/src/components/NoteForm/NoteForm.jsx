@@ -22,11 +22,12 @@ export default function NoteForm(props) {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+
     if (stockId && noteId) {
       await noteService.updateNote(stockId, noteId, formData);
       navigate(`/stocks/${stockId}`);
-    } else {
-      props.handleAddNote(formData);
+    } else if (props.handleAddNote) {
+      await props.handleAddNote(formData);
       setFormData({ content: "" });
     }
   };

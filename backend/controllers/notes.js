@@ -25,7 +25,7 @@ async function update(req, res) {
   try {
     const stock = await Stock.findOne({ "notes._id": req.params.noteId });
     const note = stock.notes.id(req.params.noteId);
-    if (!stock.user.equals(req.user._id)) {
+    if (!note.user.equals(req.user._id)) {
       return res.status(403).json({ message: "Unauthorized" });
     }
     note.content = req.body.content;
@@ -36,17 +36,50 @@ async function update(req, res) {
   }
 }
 
+// async function deleteNote(req, res) {
+//   try {
+//     const stock = await Stock.findOne({ "notes._id": req.params.noteId });
+//     if (!stock) {
+//       return res.status(404).json({ message: "Stock not found" });
+//     }
+
+//     const note = stock.notes.id(req.params.noteId);
+//     if (!note.user || !note.user.equals(req.user._id)) {
+//       return res.status(403).json({ message: "Unauthorized" });
+//     }
+//     note.remove({ _id: req.params.noteId });
+//     await stock.save();
+//     res.status(200).json({ message: "Note deleted successfully" });
+//   } catch (err) {
+//     console.error("DELETE NOTE ERROR:", err);
+//     res.status(500).json({ err: err.message });
+//   }
+// }
+
 async function deleteNote(req, res) {
   try {
-    const stock = await Stock.findOne({ "notes._id": req.params.noteId });
-    const note = stock.notes.id(req.params.noteId);
-    if (!stock.user.equals(req.user._id)) {
+    const { stockId, noteId } = req.params;
+
+    const stock = await Stock.findById(stockId);
+    if (!stock) {
+      return res.status(404).json({ message: "Stock not found" });
+    }
+
+    const note = stock.notes.id(noteId);
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    if (!note.user.equals(req.user._id)) {
       return res.status(403).json({ message: "Unauthorized" });
     }
-    stock.notes.remove({ _id: req.params.noteId });
+
+    note.deleteOne();
     await stock.save();
+
     res.status(200).json({ message: "Note deleted successfully" });
   } catch (err) {
-    res.status(500).json({ err: err.message });
+    console.error("Error in deleteNote controller:", err);
+    res.status(500).json({ message: err.message });
   }
 }

@@ -54,7 +54,9 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
-    const stock = await Stock.findById(req.params.stockId);
+    const stock = await Stock.findById(req.params.stockId)
+      .populate("user")
+      .populate("notes.user");
 
     if (!stock) {
       return res.status(404).json({ message: "Stock not found" });

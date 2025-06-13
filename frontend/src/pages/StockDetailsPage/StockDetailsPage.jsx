@@ -26,13 +26,19 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
 
   const handleDeleteNote = async (noteId) => {
     try {
-      await noteService.deleteNote(stock._id, noteId);
+      console.log(
+        "Attempting to delete note:",
+        noteId,
+        "from stock:",
+        stock._id
+      );
+      await noteService.deleteNote(noteId);
       setStock({
         ...stock,
         notes: stock.notes.filter((c) => c._id !== noteId),
       });
     } catch (err) {
-      console.log(err);
+      console.log("Error in handleDeleteNote:", err);
     }
   };
 
@@ -64,12 +70,14 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
               <p>
                 {`Posted on ${new Date(note.createdAt).toLocaleDateString()}`}
               </p>
-              <>
-                <Link to={`/notes/${note._id}`}>Edit</Link>
-                <button onClick={() => handleDeleteNote(note._id)}>
-                  Delete
-                </button>
-              </>
+              {note.user._id === user._id && (
+                <>
+                  <Link to={`/notes/${note._id}`}>Edit</Link>
+                  <button onClick={() => handleDeleteNote(note._id)}>
+                    Delete
+                  </button>
+                </>
+              )}
             </header>
             <p>{note.content}</p>
           </article>
