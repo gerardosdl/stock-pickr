@@ -6,6 +6,7 @@ import HomePage from "../HomePage/HomePage";
 import StockListPage from "../StockListPage/StockListPage";
 import NewStockPage from "../NewStockPage/NewStockPage";
 import StockDetailsPage from "../StockDetailsPage/StockDetailsPage";
+import NoteForm from "../../components/NoteForm/NoteForm";
 import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
 import NavBar from "../../components/NavBar/NavBar";
@@ -39,6 +40,7 @@ export default function App() {
               }
             />
             <Route path="/stocks/new" element={<NewStockPage />} />
+            <Route path="/notes/:noteId" element={<NoteForm />} />
             <Route path="*" element={null} />
           </Routes>
         ) : (

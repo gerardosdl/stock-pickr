@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
+import NoteForm from "../../components/NoteForm/NoteForm";
 import * as stockService from "../../services/stockService";
+import * as noteService from "../../services/noteService";
 
 export default function StockDetailsPage({ user, handleDeleteStock }) {
   const { stockId } = useParams();
@@ -15,7 +17,24 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
     fetchStock();
   }, [stockId]);
 
+  const handleAddNote = async (noteFormData) => {
+    const newNote = await noteService.create(stockId, noteFormData);
+    setStock({ ...stock, notes: [...stock.notes, newNote] });
+  };
+
   console.log("stock state:", stock);
+
+  const handleDeleteNote = async (noteId) => {
+    try {
+      await noteService.deleteNote(stock._id, noteId);
+      setStock({
+        ...stock,
+        notes: stock.notes.filter((c) => c._id !== noteId),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   if (!stock) return <main>Loading...</main>;
   return (
@@ -33,6 +52,28 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
             </button>
           )}
         </header>
+      </section>
+      <section>
+        <h2>Notes:</h2>
+        <NoteForm handleAddNote={handleAddNote} />
+
+        {!stock.notes.length && <p>There are no notes!</p>}
+        {stock.notes.map((note) => (
+          <article key={note._id}>
+            <header>
+              <p>
+                {`Posted on ${new Date(note.createdAt).toLocaleDateString()}`}
+              </p>
+              <>
+                <Link to={`/notes/${note._id}`}>Edit</Link>
+                <button onClick={() => handleDeleteNote(note._id)}>
+                  Delete
+                </button>
+              </>
+            </header>
+            <p>{note.content}</p>
+          </article>
+        ))}
       </section>
     </main>
   );
