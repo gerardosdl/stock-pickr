@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router";
+import { useParams } from "react-router";
 import NoteForm from "../../components/NoteForm/NoteForm";
 import * as stockService from "../../services/stockService";
 import * as noteService from "../../services/noteService";
@@ -8,6 +8,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
   const { stockId } = useParams();
   console.log("stockId", stockId);
   const [stock, setStock] = useState(null);
+  const [editingNoteId, setEditingNoteId] = useState(null);
 
   useEffect(() => {
     async function fetchStock() {
@@ -24,23 +25,14 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
 
   console.log("stock state:", stock);
 
-  // const handleDeleteNote = async (noteId) => {
-  //   try {
-  //     console.log(
-  //       "Attempting to delete note:",
-  //       noteId,
-  //       "from stock:",
-  //       stock._id
-  //     );
-  //     await noteService.deleteNote(noteId);
-  //     setStock({
-  //       ...stock,
-  //       notes: stock.notes.filter((c) => c._id !== noteId),
-  //     });
-  //   } catch (err) {
-  //     console.log("Error in handleDeleteNote:", err);
-  //   }
-  // };
+  const handleUpdateNote = async (noteId, formData) => {
+    await noteService.update(noteId, formData);
+    const updatedNotes = stock.notes.map((note) =>
+      note._id === noteId ? { ...note, content: formData.content } : note
+    );
+    setStock({ ...stock, notes: updatedNotes });
+    setEditingNoteId(null);
+  };
 
   const handleDeleteNote = async (noteId) => {
     try {
@@ -85,14 +77,24 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
               </p>
               {note.user._id === user._id && (
                 <>
-                  <Link to={`/notes/${note._id}`}>Edit</Link>
+                  <button onClick={() => setEditingNoteId(note._id)}>
+                    Edit
+                  </button>
                   <button onClick={() => handleDeleteNote(note._id)}>
                     Delete
                   </button>
                 </>
               )}
             </header>
-            <p>{note.content}</p>
+            <p style={{ whiteSpace: "pre-line " }}>{note.content}</p>
+            {editingNoteId === note._id && (
+              <NoteForm
+                stockId={stockId}
+                noteId={note._id}
+                initialData={note}
+                handleUpdateNote={handleUpdateNote}
+              />
+            )}
           </article>
         ))}
       </section>

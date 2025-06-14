@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
-import * as noteService from "../../services/noteService";
-import * as stockService from "../../services/stockService";
 
-export default function NoteForm(props) {
+export default function NoteForm({
+  stockId,
+  noteId,
+  initialData,
+  handleAddNote,
+  handleUpdateNote,
+}) {
   const [formData, setFormData] = useState({ content: "" });
-  const { stockId, noteId } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchStock = async () => {
-      const StockData = await stockService.show(stockId);
-      setFormData(StockData.notes.find((note) => note._id === noteId));
-    };
-    if (stockId && noteId) fetchStock();
-  }, [stockId, noteId]);
+    if (initialData) {
+      setFormData({ content: initialData.content });
+    }
+  }, [initialData]);
 
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
@@ -23,11 +22,10 @@ export default function NoteForm(props) {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
-    if (stockId && noteId) {
-      await noteService.updateNote(stockId, noteId, formData);
-      navigate(`/stocks/${stockId}`);
-    } else if (props.handleAddNote) {
-      await props.handleAddNote(formData);
+    if (noteId && handleUpdateNote) {
+      await handleUpdateNote(noteId, formData);
+    } else if (handleAddNote) {
+      await handleAddNote(formData);
       setFormData({ content: "" });
     }
   };
@@ -40,8 +38,9 @@ export default function NoteForm(props) {
         id="note-input"
         value={formData.content}
         onChange={handleChange}
+        placeholder="Write yout note here..."
       />
-      <button type="submit">SUBMIT NOTE</button>
+      <button type="submit">{noteId ? "UPDATE NOTE" : "SUBMIT NOTE"}</button>
     </form>
   );
 }
