@@ -57,7 +57,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
           <p>Current Price: {stock.currentPrice}</p>
           <p>Price when added: {stock.priceAddedAt}</p>
           <p>Added on: {new Date(stock.createdAt).toLocaleDateString()}</p>
-          {stock.user === user._id && (
+          {(stock.user._id || stock.user) === user._id && (
             <button onClick={() => handleDeleteStock(stockId)}>
               Delete Stock
             </button>
