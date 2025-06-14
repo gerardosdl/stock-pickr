@@ -24,21 +24,34 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
 
   console.log("stock state:", stock);
 
+  // const handleDeleteNote = async (noteId) => {
+  //   try {
+  //     console.log(
+  //       "Attempting to delete note:",
+  //       noteId,
+  //       "from stock:",
+  //       stock._id
+  //     );
+  //     await noteService.deleteNote(noteId);
+  //     setStock({
+  //       ...stock,
+  //       notes: stock.notes.filter((c) => c._id !== noteId),
+  //     });
+  //   } catch (err) {
+  //     console.log("Error in handleDeleteNote:", err);
+  //   }
+  // };
+
   const handleDeleteNote = async (noteId) => {
     try {
-      console.log(
-        "Attempting to delete note:",
-        noteId,
-        "from stock:",
-        stock._id
-      );
+      console.log("Attempting to delete note:", noteId);
       await noteService.deleteNote(noteId);
-      setStock({
-        ...stock,
-        notes: stock.notes.filter((c) => c._id !== noteId),
-      });
+      setStock((prevStock) => ({
+        ...prevStock,
+        notes: prevStock.notes.filter((note) => note._id !== noteId),
+      }));
     } catch (err) {
-      console.log("Error in handleDeleteNote:", err);
+      console.error("Backend error message:", err.message);
     }
   };
 

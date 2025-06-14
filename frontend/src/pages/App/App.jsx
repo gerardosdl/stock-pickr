@@ -40,7 +40,10 @@ export default function App() {
               }
             />
             <Route path="/stocks/new" element={<NewStockPage />} />
-            <Route path="/notes/:noteId" element={<NoteForm />} />
+            <Route
+              path="stocks/:stockId/notes/:noteId"
+              element={<NoteForm />}
+            />
             <Route path="*" element={null} />
           </Routes>
         ) : (
