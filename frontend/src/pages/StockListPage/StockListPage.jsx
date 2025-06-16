@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import * as stockService from "../../services/stockService";
+import StockFilter from "../../components/StockFilter/StockFilter";
 
 export default function StockListPage({ user }) {
   const [stocks, setStocks] = useState([]);
@@ -18,6 +19,7 @@ export default function StockListPage({ user }) {
   return (
     <>
       <h1>Stock List</h1>
+      <StockFilter stocks={stocks} />
       {stocks.length ? (
         <main>
           {stocks.map((stock) => (
