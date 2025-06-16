@@ -24,10 +24,12 @@ export default function StockListPage({ user }) {
             <Link key={stock._id} to={`/stocks/${stock._id}`}>
               <article>
                 <header>
-                  <h2>{stock.name}</h2>
-                  <p>
-                    Added on {new Date(stock.createdAt).toLocaleDateString()}
-                  </p>
+                  <h2>
+                    {stock.name}{" "}
+                    <p>
+                      Added on {new Date(stock.createdAt).toLocaleDateString()}
+                    </p>
+                  </h2>
                 </header>
               </article>
             </Link>
