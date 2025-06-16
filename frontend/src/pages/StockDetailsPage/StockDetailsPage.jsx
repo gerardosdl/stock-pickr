@@ -75,18 +75,16 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
               <p>
                 {`Posted on ${new Date(note.createdAt).toLocaleDateString()}`}
               </p>
-              {note.user._id === user._id && (
-                <>
-                  <button onClick={() => setEditingNoteId(note._id)}>
-                    Edit
-                  </button>
-                  <button onClick={() => handleDeleteNote(note._id)}>
-                    Delete
-                  </button>
-                </>
-              )}
             </header>
             <p style={{ whiteSpace: "pre-line " }}>{note.content}</p>
+            {note.user._id === user._id && (
+              <>
+                <button onClick={() => setEditingNoteId(note._id)}>Edit</button>
+                <button onClick={() => handleDeleteNote(note._id)}>
+                  Delete
+                </button>
+              </>
+            )}
             {editingNoteId === note._id && (
               <NoteForm
                 stockId={stockId}

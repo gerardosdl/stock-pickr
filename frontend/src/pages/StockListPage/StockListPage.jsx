@@ -25,10 +25,8 @@ export default function StockListPage({ user }) {
               <article>
                 <header>
                   <h2>
-                    {stock.name}{" "}
-                    <p>
-                      Added on {new Date(stock.createdAt).toLocaleDateString()}
-                    </p>
+                    {stock.name} - Added on{" "}
+                    {new Date(stock.createdAt).toLocaleDateString()}
                   </h2>
                 </header>
               </article>
