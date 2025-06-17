@@ -10,42 +10,47 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
   const [stock, setStock] = useState(null);
   const [editingNoteId, setEditingNoteId] = useState(null);
 
-  useEffect(() => {
-    async function fetchStock() {
-      const stockData = await stockService.show(stockId);
-      setStock(stockData);
-    }
-    fetchStock();
-  }, [stockId]);
+  useEffect(
+    function () {
+      async function fetchStock() {
+        const stockData = await stockService.show(stockId);
+        setStock(stockData);
+      }
+      fetchStock();
+    },
+    [stockId]
+  );
 
-  const handleAddNote = async (noteFormData) => {
+  async function handleAddNote(noteFormData) {
     const newNote = await noteService.create(stockId, noteFormData);
     setStock({ ...stock, notes: [...stock.notes, newNote] });
-  };
+  }
 
   console.log("stock state:", stock);
 
-  const handleUpdateNote = async (noteId, formData) => {
+  async function handleUpdateNote(noteId, formData) {
     await noteService.update(noteId, formData);
     const updatedNotes = stock.notes.map((note) =>
       note._id === noteId ? { ...note, content: formData.content } : note
     );
     setStock({ ...stock, notes: updatedNotes });
     setEditingNoteId(null);
-  };
+  }
 
-  const handleDeleteNote = async (noteId) => {
+  async function handleDeleteNote(noteId) {
     try {
       console.log("Attempting to delete note:", noteId);
       await noteService.deleteNote(noteId);
-      setStock((prevStock) => ({
-        ...prevStock,
-        notes: prevStock.notes.filter((note) => note._id !== noteId),
-      }));
+      setStock(function (prevStock) {
+        return {
+          ...prevStock,
+          notes: prevStock.notes.filter((note) => note._id !== noteId),
+        };
+      });
     } catch (err) {
       console.error("Backend error message:", err.message);
     }
-  };
+  }
 
   if (!stock) return <main>Loading...</main>;
   return (
