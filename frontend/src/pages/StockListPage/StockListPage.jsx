@@ -7,16 +7,19 @@ export default function StockListPage({ user }) {
   const [stocks, setStocks] = useState([]);
   const [filteredStocks, setFilteredStocks] = useState([]);
 
-  useEffect(() => {
-    async function fetchStocks() {
-      const stocks = await stockService.index();
-      setStocks(stocks);
-      setFilteredStocks(stocks);
-    }
-    if (user) {
-      fetchStocks();
-    }
-  }, [user]);
+  useEffect(
+    function () {
+      async function fetchStocks() {
+        const stocks = await stockService.index();
+        setStocks(stocks);
+        setFilteredStocks(stocks);
+      }
+      if (user) {
+        fetchStocks();
+      }
+    },
+    [user]
+  );
 
   function handleFilter(filtered) {
     setFilteredStocks(filtered);
