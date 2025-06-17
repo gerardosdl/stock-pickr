@@ -13,7 +13,7 @@ export default function HomePage() {
           borderRadius: "1rem",
         }}
       />
-      <p>
+      <p className="disclaimer">
         <strong>Disclaimer: </strong>This app is designed to help users pick and
         take notes on their strategy or observations over time. It uses the free
         version of the Polygon API, which is limited to 5 calls per minute.

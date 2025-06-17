@@ -9,7 +9,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 * {
@@ -86,4 +86,8 @@ h2 {
 
 .error-message {
   color: rgb(166, 29, 29);
+}
+
+.disclaimer {
+  padding: 3rem;
 }
