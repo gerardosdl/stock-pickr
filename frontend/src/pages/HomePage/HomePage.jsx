@@ -2,6 +2,17 @@ export default function HomePage() {
   return (
     <>
       <h1>Home Page</h1>
+      <img
+        src="https://i.imgur.com/WX15AHh.png"
+        alt="bull and bear"
+        className="bull-bear-img"
+        style={{
+          opacity: 0.4,
+          mixBlendMode: "multiply",
+          width: "80%",
+          borderRadius: "1rem",
+        }}
+      />
       <p>
         <strong>Disclaimer: </strong>This app is designed to help users pick and
         take notes on their strategy or observations over time. It uses the free

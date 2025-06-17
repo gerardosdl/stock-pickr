@@ -64,8 +64,6 @@ Users can filter their stock list, add, edit or delete notes, and compare the pr
 ## References
 
 - [React official documentation](https://react.dev/)
-- [React Router](https://reactrouter.com/en/main) – For route-based navigation and URL params
-- [CSS `white-space` property](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
 - [Polygon.io API](https://polygon.io/docs) – Used for fetching stock data (free tier limits to 5 requests/minute)
 - [MongoDB official docs](https://www.mongodb.com/docs/manual/)
 

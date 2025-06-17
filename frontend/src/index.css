@@ -21,7 +21,7 @@ body {
   min-height: 100vh;
   background-image: url("https://i.imgur.com/jgfv8g0.png");
   background-size: cover;
-  background-position: center top;
+  background-position: top right;
   background-attachment: fixed;
   color: #1a1a1a;
 }
