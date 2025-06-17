@@ -5,24 +5,30 @@ import StockFilter from "../../components/StockFilter/StockFilter";
 
 export default function StockListPage({ user }) {
   const [stocks, setStocks] = useState([]);
+  const [filteredStocks, setFilteredStocks] = useState([]);
 
   useEffect(() => {
     async function fetchStocks() {
       const stocks = await stockService.index();
       setStocks(stocks);
+      setFilteredStocks(stocks);
     }
     if (user) {
       fetchStocks();
     }
   }, [user]);
 
+  function handleFilter(filtered) {
+    setFilteredStocks(filtered);
+  }
+
   return (
     <>
       <h1>Stock List</h1>
-      <StockFilter stocks={stocks} />
-      {stocks.length ? (
+      <StockFilter stocks={stocks} handleFilter={handleFilter} />
+      {filteredStocks.length ? (
         <main>
-          {stocks.map((stock) => (
+          {filteredStocks.map((stock) => (
             <Link key={stock._id} to={`/stocks/${stock._id}`}>
               <article>
                 <header>

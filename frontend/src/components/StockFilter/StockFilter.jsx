@@ -13,10 +13,10 @@ import { useState, useEffect, useRef } from "react";
 // all instances of this component would share the same variable.
 const delayMs = 1000;
 
-export default function StockFilter({ stocks }) {
+export default function StockFilter({ stocks, handleFilter }) {
   const [filterText, setFilterText] = useState("");
   const [debounce, setDebounce] = useState(false);
-  const [filteredStocks, setFilteredStocks] = useState(stocks);
+
   // Refs are used to "remember" info like state, except
   // that if changed, it does not cause a re-render
   const timerIdRef = useRef();
@@ -25,7 +25,8 @@ export default function StockFilter({ stocks }) {
     function () {
       function doFilter() {
         const re = new RegExp(`.*${filterText}.*`, "i");
-        setFilteredStocks(stocks.filter((stock) => re.test(stock.name)));
+        const filtered = stocks.filter((stock) => re.test(stock.name));
+        handleFilter(filtered);
       }
       if (!debounce) {
         doFilter();
@@ -57,10 +58,7 @@ export default function StockFilter({ stocks }) {
         onChange={(evt) => setDebounce(!debounce)}
       />
       &nbsp;
-      <span>(delay {delayMs} milliseconds)</span> <br /> <br />
-      {filteredStocks.map((stock) => (
-        <div key={stock._id}>{stock.name}</div>
-      ))}
+      <span>(delay {delayMs} milliseconds)</span>
     </div>
   );
 }
