@@ -6,7 +6,6 @@ import HomePage from "../HomePage/HomePage";
 import StockListPage from "../StockListPage/StockListPage";
 import NewStockPage from "../NewStockPage/NewStockPage";
 import StockDetailsPage from "../StockDetailsPage/StockDetailsPage";
-import NoteForm from "../../components/NoteForm/NoteForm";
 import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
 import NavBar from "../../components/NavBar/NavBar";
@@ -16,11 +15,12 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [stocks, setStocks] = useState([]);
   const navigate = useNavigate();
-  const handleDeleteStock = async (stockId) => {
+
+  async function handleDeleteStock(stockId) {
     const deletedStock = await stockService.deleteStock(stockId);
     setStocks(stocks.filter((stock) => stock._id !== deletedStock._id));
     navigate("/stocks");
-  };
+  }
 
   return (
     <main className="App">
