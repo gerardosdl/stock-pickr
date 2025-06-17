@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 export default function NoteForm({
-  stockId,
   noteId,
   initialData,
   handleAddNote,
@@ -9,17 +8,20 @@ export default function NoteForm({
 }) {
   const [formData, setFormData] = useState({ content: "" });
 
-  useEffect(() => {
-    if (initialData) {
-      setFormData({ content: initialData.content });
-    }
-  }, [initialData]);
+  useEffect(
+    function () {
+      if (initialData) {
+        setFormData({ content: initialData.content });
+      }
+    },
+    [initialData]
+  );
 
-  const handleChange = (evt) => {
+  function handleChange(evt) {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
-  };
+  }
 
-  const handleSubmit = async (evt) => {
+  async function handleSubmit(evt) {
     evt.preventDefault();
 
     if (noteId && handleUpdateNote) {
@@ -28,7 +30,7 @@ export default function NoteForm({
       await handleAddNote(formData);
       setFormData({ content: "" });
     }
-  };
+  }
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="note-input">Note:</label>
