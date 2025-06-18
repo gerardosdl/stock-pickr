@@ -25,12 +25,26 @@ async function create(req, res) {
     const priceRes = await fetch(
       `https://api.polygon.io/v2/aggs/ticker/${ticker}/prev?adjusted=true&apiKey=${process.env.POLYGON_API_KEY}`
     );
+
+    if (priceRes.status === 429) {
+      return res.status(429).json({
+        message: "API rate limit reached. Please try again in a minute.",
+      });
+    }
+
     const priceData = await priceRes.json();
     const price = priceData?.results?.[0]?.c;
 
     const nameRes = await fetch(
       `https://api.polygon.io/v3/reference/tickers/${ticker}?apiKey=${process.env.POLYGON_API_KEY}`
     );
+
+    if (nameRes.status === 429) {
+      return res.status(429).json({
+        message: "API rate limit reached. Please try again in a minute.",
+      });
+    }
+
     const nameData = await nameRes.json();
     const name = nameData?.results?.name;
 
@@ -65,6 +79,13 @@ async function show(req, res) {
     const priceRes = await fetch(
       `https://api.polygon.io/v2/aggs/ticker/${stock.symbol}/prev?adjusted=true&apiKey=${process.env.POLYGON_API_KEY}`
     );
+
+    if (priceRes.status === 429) {
+      return res.status(429).json({
+        message: "API rate limit reached. Please try again in a minute.",
+      });
+    }
+
     const priceData = await priceRes.json();
     const currentPrice = priceData?.results?.[0]?.c;
 

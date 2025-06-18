@@ -51,6 +51,11 @@ export default function App() {
           </Routes>
         )}
       </section>
+      <footer
+        style={{ textAlign: "center", marginTop: "2rem", padding: "1rem" }}
+      >
+        Gerardo &copy; 2025
+      </footer>
     </main>
   );
 }
