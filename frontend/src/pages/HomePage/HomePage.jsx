@@ -1,7 +1,7 @@
 export default function HomePage() {
   return (
     <>
-      <h1>Home Page</h1>
+      <h1>Stock PickR</h1>
       <img
         src="https://i.imgur.com/WX15AHh.png"
         alt="bull and bear"
