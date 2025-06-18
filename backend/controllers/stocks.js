@@ -14,7 +14,6 @@ async function index(req, res) {
     });
     res.json(stocks);
   } catch (err) {
-    console.log(err);
     res.status(500).json({ message: "Failed to fetch stocks" });
   }
 }
@@ -47,7 +46,6 @@ async function create(req, res) {
     });
     res.json(stock);
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: "Failed to create stock" });
   }
 }

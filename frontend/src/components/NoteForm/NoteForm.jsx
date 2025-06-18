@@ -40,7 +40,7 @@ export default function NoteForm({
         id="note-input"
         value={formData.content}
         onChange={handleChange}
-        placeholder="Write yout note here..."
+        placeholder="Write your note here..."
       />
       <button type="submit">{noteId ? "UPDATE NOTE" : "SUBMIT NOTE"}</button>
     </form>

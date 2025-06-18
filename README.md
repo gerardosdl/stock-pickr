@@ -66,5 +66,7 @@ Users can filter their stock list, add, edit or delete notes, and compare the pr
 - [React official documentation](https://react.dev/)
 - [Polygon.io API](https://polygon.io/docs) – Used for fetching stock data (free tier limits to 5 requests/minute)
 - [MongoDB official docs](https://www.mongodb.com/docs/manual/)
+- [MDN – HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
+- [Express.js official error handling guide](https://expressjs.com/en/guide/error-handling.html)
 
 ---

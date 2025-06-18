@@ -6,7 +6,6 @@ import * as noteService from "../../services/noteService";
 
 export default function StockDetailsPage({ user, handleDeleteStock }) {
   const { stockId } = useParams();
-  console.log("stockId", stockId);
   const [stock, setStock] = useState(null);
   const [editingNoteId, setEditingNoteId] = useState(null);
 
@@ -26,8 +25,6 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
     setStock({ ...stock, notes: [...stock.notes, newNote] });
   }
 
-  console.log("stock state:", stock);
-
   async function handleUpdateNote(noteId, formData) {
     await noteService.update(noteId, formData);
     const updatedNotes = stock.notes.map((note) =>
@@ -39,7 +36,6 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
 
   async function handleDeleteNote(noteId) {
     try {
-      console.log("Attempting to delete note:", noteId);
       await noteService.deleteNote(noteId);
       setStock(function (prevStock) {
         return {
@@ -47,9 +43,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
           notes: prevStock.notes.filter((note) => note._id !== noteId),
         };
       });
-    } catch (err) {
-      console.error("Backend error message:", err.message);
-    }
+    } catch (err) {}
   }
 
   if (!stock) return <main>Loading...</main>;
