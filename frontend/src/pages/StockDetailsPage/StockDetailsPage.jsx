@@ -8,6 +8,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
   const { stockId } = useParams();
   const [stock, setStock] = useState(null);
   const [editingNoteId, setEditingNoteId] = useState(null);
+  const [limitReached, setLimitReached] = useState(false);
 
   useEffect(
     function () {
@@ -17,9 +18,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
           setStock(stockData);
         } catch (err) {
           if (err.status === 429) {
-            alert(
-              "API rate limit reached. Please wait a minute and try again."
-            );
+            setLimitReached(true);
           }
         }
       }
@@ -54,6 +53,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
     } catch (err) {}
   }
 
+  if (!stock && limitReached) return <main>Please try again in a minute.</main>;
   if (!stock) return <main>Loading...</main>;
   return (
     <main>
