@@ -31,27 +31,37 @@ h2 {
   text-align: center;
 }
 
+button:disabled {
+  background-color: grey;
+}
+
 button {
-  border: 0.5vmin solid #1a1a1a;
-  border-radius: 2vmin;
-  padding: 0.8vmin;
-  font-size: 2vmin;
-  font-weight: 800;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  color: whitesmoke;
+  border: none;
+  width: fit-content;
+  min-width: 8em;
+  max-width: 90%;
+  border-radius: 0.8vmin;
+  display: inline-flex;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  gap: 1em;
+  background: #1c1a1c;
   cursor: pointer;
-  margin: 0px 21px 21px 21px;
+  transition: all 450ms ease-in-out;
+  font-weight: 800;
+  color: whitesmoke;
+  padding: 0.5vmin 1.5vmin;
+  font-size: 2vmin;
+  margin: 0 1.5rem 1.5rem 1.5rem;
 }
 
 button:hover {
-  background-color: white;
-  color: #1a1a1a;
-  border-color: #1a1a1a;
-}
-
-button:disabled {
-  background-color: grey;
+  background: linear-gradient(0deg, #2f4d8f, #060164);
+  box-shadow: inset 0px 1px 0px 0px rgba(61, 24, 184, 0.4),
+    inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+    0px 0px 0px 4px rgba(255, 255, 255, 0.2), 0px 0px 180px 0px #2904a2;
+  transform: translateY(-2px);
 }
 
 form {
@@ -73,6 +83,12 @@ textarea {
 
 form > button:last-child {
   margin-top: 2vmin;
+}
+
+article {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 label {

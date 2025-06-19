@@ -84,7 +84,10 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
             </p>
           )}
           {(stock.user._id || stock.user) === user._id && (
-            <button onClick={() => handleDeleteStock(stockId)}>
+            <button
+              onClick={() => handleDeleteStock(stockId)}
+              style={{ display: "block", margin: "0" }}
+            >
               Delete Stock
             </button>
           )}
@@ -102,7 +105,15 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
                 {`Posted on ${new Date(note.createdAt).toLocaleDateString()}`}
               </p>
             </header>
-            <p style={{ whiteSpace: "pre-line " }}>{note.content}</p>
+            <p
+              style={{
+                whiteSpace: "pre-line ",
+                overflowWrap: "break-word",
+                maxWidth: "100%",
+              }}
+            >
+              {note.content}
+            </p>
             {note.user._id === user._id && (
               <>
                 <button onClick={() => setEditingNoteId(note._id)}>Edit</button>

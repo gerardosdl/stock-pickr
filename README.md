@@ -44,7 +44,7 @@ Users can filter their stock list, add, edit or delete notes, and compare the pr
 ## Getting Started
 
 - [View Project Planning Docs](https://trello.com/b/EeIciRkB)
-- [Launch the Live App]()
+- [Launch the Live App](https://stock-pickr-231b4dae260d.herokuapp.com/)
 
 ---
 
@@ -70,5 +70,6 @@ Users can filter their stock list, add, edit or delete notes, and compare the pr
 - [Express.js official error handling guide](https://expressjs.com/en/guide/error-handling.html)
 - [NN/g – 10 Design Guidelines for Reporting Errors in Forms](https://www.nngroup.com/articles/errors-forms-design-guidelines/)
 - [InterServer – Understanding & Handling 429 Too Many Requests Errors](https://www.interserver.net/tips/kb/understanding-and-handling-429-too-many-requests-errors/)
+- [https://uiverse.io/AlimurtuzaCodes/average-liger-0](https://uiverse.io/AlimurtuzaCodes/average-liger-0)
 
 ---

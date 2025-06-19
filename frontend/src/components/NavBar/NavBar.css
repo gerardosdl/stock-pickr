@@ -15,8 +15,13 @@
   }
 
   a:hover {
-    background-color: #1a1a1a;
-    color: whitesmoke;
+    background: linear-gradient(0deg, #343537, #000000);
+    box-shadow: inset 0px 1px 0px 0px rgba(13, 13, 14, 0.4),
+      inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+      0px 0px 0px 4px rgba(255, 255, 255, 0.2), 0px 0px 180px 0px #000000;
+    transform: translateY(-2px);
+    color: white;
+    transition: all 450ms ease-in-out;
   }
 
   a.active {
