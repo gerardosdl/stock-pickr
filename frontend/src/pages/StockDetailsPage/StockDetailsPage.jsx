@@ -12,8 +12,16 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
   useEffect(
     function () {
       async function fetchStock() {
-        const stockData = await stockService.show(stockId);
-        setStock(stockData);
+        try {
+          const stockData = await stockService.show(stockId);
+          setStock(stockData);
+        } catch (err) {
+          if (err.status === 429) {
+            alert(
+              "API rate limit reached. Please wait a minute and try again."
+            );
+          }
+        }
       }
       fetchStock();
     },

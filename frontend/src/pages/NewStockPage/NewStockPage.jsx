@@ -20,7 +20,13 @@ export default function NewStockPage() {
       await stockService.create(formData);
       navigate("/stocks");
     } catch (err) {
-      setErrorMsg("Adding Stock Failed");
+      if (err.status === 429) {
+        setErrorMsg(
+          "API rate limit reached. Please wait a minute and try again"
+        );
+      } else {
+        setErrorMsg("Adding Stock Failed");
+      }
     }
   }
 

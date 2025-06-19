@@ -68,5 +68,7 @@ Users can filter their stock list, add, edit or delete notes, and compare the pr
 - [MongoDB official docs](https://www.mongodb.com/docs/manual/)
 - [MDN – HTTP response status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
 - [Express.js official error handling guide](https://expressjs.com/en/guide/error-handling.html)
+- [NN/g – 10 Design Guidelines for Reporting Errors in Forms](https://www.nngroup.com/articles/errors-forms-design-guidelines/)
+- [InterServer – Understanding & Handling 429 Too Many Requests Errors](https://www.interserver.net/tips/kb/understanding-and-handling-429-too-many-requests-errors/)
 
 ---
