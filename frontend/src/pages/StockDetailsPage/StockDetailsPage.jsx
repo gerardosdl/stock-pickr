@@ -22,6 +22,7 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
             "API rate limit reached. Please try again in a minute."
           ) {
             setLimitReached(true);
+            // alert("API rate limit, please wait 1 minute");
           }
         }
       }
