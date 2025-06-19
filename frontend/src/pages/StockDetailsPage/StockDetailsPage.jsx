@@ -17,7 +17,10 @@ export default function StockDetailsPage({ user, handleDeleteStock }) {
           const stockData = await stockService.show(stockId);
           setStock(stockData);
         } catch (err) {
-          if (err.status === 429) {
+          if (
+            err.message ===
+            "API rate limit reached. Please try again in a minute."
+          ) {
             setLimitReached(true);
           }
         }
