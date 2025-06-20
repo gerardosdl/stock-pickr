@@ -9,22 +9,22 @@ Users can filter their stock list, add, edit or delete notes, and compare the pr
 ## Screenshots
 
 - **Homepage View**  
-  ![Screenshot of home page]()
+  ![Screenshot of home page](https://i.imgur.com/GONRVGl.png)
 
-- **All Items Page**  
-  ![Screenshot of stock list ]()
+- **Stock List View**  
+  ![Screenshot of stock list ](https://i.imgur.com/dOQqBEY.png)
 
-- **Item Details View**  
-  ![Screenshot of stock detail page]()
+- **Stock Details View**  
+  ![Screenshot of stock detail page](https://i.imgur.com/2f0sFxj.png)
 
-- **Add Stocks**  
-  ![Screenshot of add stock form]()
+- **Add Stock**  
+  ![Screenshot of add stock form](https://i.imgur.com/DbkmQsq.png)
 
-- **Add Notes**  
-  ![Screenshot of add note form]()
+- **Add Note**  
+  ![Screenshot of add note form](https://i.imgur.com/kw3eEOo.png)
 
-- **Edit Notes**  
-  ![Screenshot of edit note form]()
+- **Edit Note**  
+  ![Screenshot of edit note form showing delete and edit buttons](https://i.imgur.com/mRGACiY.png)
 
 ---
 
